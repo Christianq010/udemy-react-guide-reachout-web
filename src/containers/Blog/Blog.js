@@ -15,14 +15,25 @@ class Blog extends Component {
         // axios uses promises and returns a JS promise
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
-                this.setState({posts: response.data})
+                // limit number of blog posts
+                const postLimit = response.data.slice(0, 5);
+                // Add the Author property to our response (post data)
+                const updatedPosts = postLimit.map(post => {
+                    return {
+                        ...post,
+                        author: 'Chris'
+                    }
+                });
+                this.setState({posts: updatedPosts})
+                // below to set State to all posts 
+                // this.setState({posts: response.posts})
                 // console.log(response);
             });
     }
     render () {
         // call our posts and map them into a posts variable and then output our <Post /> element
         const posts = this.state.posts.map (post => {
-            return <Post key={post.id} title={post.title} author={post.userId} />
+            return <Post key={post.id} title={post.title} author={post.author} />
         });
         return (
             <div>
