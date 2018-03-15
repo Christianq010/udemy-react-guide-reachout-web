@@ -22,6 +22,13 @@ class FullPost extends Component {
             }
         }
     }
+    // Delete POST request
+    deletePosthandler = () => {
+        axios.delete('https://jsonplaceholder.typicode.com/posts/' + this.props.id)
+            .then(response => {
+                console.log(response)
+            });
+    }
     render () {
         let post = <p>Please select a Post!</p>;
         // don't reload fullpost before individual post GET request made, 
@@ -37,7 +44,7 @@ class FullPost extends Component {
                     <h1>{this.state.loadedPost.title}</h1>
                     <p>{this.state.loadedPost.body}</p>
                     <div className="Edit">
-                        <button className="Delete">Delete</button>
+                        <button onClick={this.deletePosthandler} className="Delete">Delete</button>
                     </div>
                 </div>
             );
