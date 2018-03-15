@@ -9,7 +9,8 @@ import './Blog.css';
 class Blog extends Component {
     state = {
         posts: [],
-        selectedPostId: null
+        selectedPostId: null,
+        error: false
     }
     // return json response, async requests
     componentDidMount () {
@@ -29,22 +30,30 @@ class Blog extends Component {
                 // below to set State to all posts 
                 // this.setState({posts: response.posts})
                 // console.log(response);
-            });
+            })
+            .catch(error => {
+                this.setState({error: true});
+                // console.log('There was an error - ', error);
+            })
     }
     // when a specific blog post is clicked, update the home page main content
     postSelectedHandler = (id) => {
         this.setState({selectedPostId: id});
     }
     render () {
-        // call our posts and map them into a posts variable and then output our <Post /> element
-        const posts = this.state.posts.map (post => {
-            return <Post 
+        // render error only when error happens
+        let posts = <p className="error">Something went wrong</p>;
+        if (!this.state.error) {
+            // call our posts and map them into a posts variable and then output our <Post /> element
+            posts = this.state.posts.map (post => {
+                return <Post 
                         key={post.id} 
                         title={post.title} 
                         author={post.author} 
                         clicked={() => this.postSelectedHandler(post.id)}
                     />
-        });
+            });
+        }
         return (
             <div>
                 <section className="Posts">

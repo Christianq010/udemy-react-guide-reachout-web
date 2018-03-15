@@ -5,3 +5,9 @@
     width: 80%;
     margin: auto;
 }
+
+.error {
+    text-align: center;
+    border: solid 1px red;
+    padding: 1em;
+}
