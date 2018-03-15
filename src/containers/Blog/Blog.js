@@ -15,7 +15,7 @@ class Blog extends Component {
     // return json response, async requests
     componentDidMount () {
         // axios uses promises and returns a JS promise
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get('/posts')
             .then(response => {
                 // limit number of blog posts
                 const postLimit = response.data.slice(0, 5);
