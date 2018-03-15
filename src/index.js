@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
 
-// Set axios default URL because its the same
+// Set global axios default URL because its the same
 axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
 axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
